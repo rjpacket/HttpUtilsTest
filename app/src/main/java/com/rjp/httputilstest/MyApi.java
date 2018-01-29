@@ -2,7 +2,9 @@ package com.rjp.httputilstest;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.rjp.httputils.BaseApi;
 import com.rjp.httputils.RetrofitService;
 
@@ -58,7 +60,14 @@ public class MyApi extends BaseApi<BaseModel> {
     }
 
     @Override
+    protected BaseModel getModel(String decodeResponse, Gson gson) {
+        return gson.fromJson(decodeResponse, new TypeToken<BaseModel>() {
+        }.getType());
+    }
+
+    @Override
     protected String decodeResponse(String response) {
+
         return response;
     }
 
@@ -69,6 +78,7 @@ public class MyApi extends BaseApi<BaseModel> {
 
     @Override
     protected String getEncryptParams(Map<String, Object> params) {
+
         return null;
     }
 

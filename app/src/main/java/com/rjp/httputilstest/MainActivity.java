@@ -26,11 +26,13 @@ public class MainActivity extends Activity {
                 .baseUrl(BASE_URL)
                 .showLoading(false)
                 .build()
-                .getList("femaleNameApi", hashMap, new BaseApi.GetListCallBack<Object>() {
+                .getList("femaleNameApi", hashMap, new BaseApi.GetListCallBack<NameModel>() {
 
                     @Override
-                    public void onSuccess(List<Object> result) {
-                        Log.e("-------------->", "success");
+                    public void onSuccess(List<NameModel> result) {
+                        for (NameModel nameModel : result) {
+                            Log.e("------->", nameModel.getFemalename());
+                        }
                     }
 
                     @Override
@@ -38,30 +40,5 @@ public class MainActivity extends Activity {
 
                     }
                 });
-
-//        new Novate.Builder(this)
-//                .baseUrl("http://www.apiopen.top:88/")
-//                .build()
-//                .rxGet("femaleNameApi", hashMap, new RxStringCallback() {
-//
-//                    @Override
-//                    public void onStart(Object tag) {
-//                        super.onStart(tag);
-//                    }
-//
-//                    @Override
-//                    public void onError(Object tag, Throwable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(Object tag, String response) {
-//                        Log.e("-------------->", response);
-//                    }
-//
-//                    @Override
-//                    public void onCancel(Object tag, Throwable e) {
-//                    }
-//                });
     }
 }

@@ -63,8 +63,7 @@ public abstract class BaseApi<U> {
                             String decodeResponse = decodeResponse(result.toString());
                             logResponse(decodeResponse);
                             Gson gson = new GsonBuilder().create();
-                            U baseModel = gson.fromJson(decodeResponse, new TypeToken<U>() {
-                            }.getType());
+                            U baseModel = getModel(decodeResponse, gson);
                             String errorcode = getResponseCode(baseModel);
                             if (getResponseSuccessCode().equals(errorcode)) {
                                 Object data = getResponseData(baseModel);
@@ -85,8 +84,14 @@ public abstract class BaseApi<U> {
                 });
     }
 
+    /**
+     * 隐藏加载框
+     */
     protected abstract void hideLoadingDialog();
 
+    /**
+     * 显示加载框
+     */
     protected abstract void showLoadingDialog();
 
     /**
@@ -124,8 +129,7 @@ public abstract class BaseApi<U> {
                             String decodeResponse = decodeResponse(result.toString());
                             logResponse(decodeResponse);
                             Gson gson = new GsonBuilder().create();
-                            U baseModel = gson.fromJson(decodeResponse, new TypeToken<U>() {
-                            }.getType());
+                            U baseModel = getModel(decodeResponse, gson);
                             String errorcode = getResponseCode(baseModel);
                             if (getResponseSuccessCode().equals(errorcode)) {
                                 Object data = getResponseData(baseModel);
@@ -181,8 +185,7 @@ public abstract class BaseApi<U> {
                             String decodeResponse = decodeResponse(result.toString());
                             logResponse(decodeResponse);
                             Gson gson = new GsonBuilder().create();
-                            U baseModel = gson.fromJson(decodeResponse, new TypeToken<U>() {
-                            }.getType());
+                            U baseModel = getModel(decodeResponse, gson);
                             String errorcode = getResponseCode(baseModel);
                             if (getResponseSuccessCode().equals(errorcode)) {
                                 Object data = getResponseData(baseModel);
@@ -238,8 +241,7 @@ public abstract class BaseApi<U> {
                             String decodeResponse = decodeResponse(result.toString());
                             logResponse(decodeResponse);
                             Gson gson = new GsonBuilder().create();
-                            U baseModel = gson.fromJson(decodeResponse, new TypeToken<U>() {
-                            }.getType());
+                            U baseModel = getModel(decodeResponse, gson);
                             String errorcode = getResponseCode(baseModel);
                             if (getResponseSuccessCode().equals(errorcode)) {
                                 Object data = getResponseData(baseModel);
@@ -263,6 +265,14 @@ public abstract class BaseApi<U> {
     private Class getTypeClassOfInterfaceObject(Object obj) {
         return (Class) ((ParameterizedType) obj.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
     }
+
+    /**
+     * 抽象得到Model
+     * @param decodeResponse
+     * @param gson
+     * @return
+     */
+    protected abstract U getModel(String decodeResponse, Gson gson);
 
     /**
      *
